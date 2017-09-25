@@ -4,12 +4,25 @@
 	.button {
 		float: none;
 		margin-bottom: 5px;
-		
+
 		&.icon {
 			color: @button-text-color;
 			display: inline-block;
 			min-height: inherit;
 			padding: 20px;
 		}
+	}
+}
+
+html.sticky-quicknav {
+	.quicknav {
+		position: fixed;
+		z-index: 350;
+		bottom: 0;
+		width: 100%;
+	}
+
+	#wrapper {
+		padding-bottom: 70px;
 	}
 }

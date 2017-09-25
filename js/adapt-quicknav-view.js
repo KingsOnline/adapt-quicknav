@@ -1,105 +1,118 @@
 /*
-* adapt-quicknav
-* License - http://github.com/adaptlearning/adapt_framework/LICENSE
-* Maintainers - Oliver Foster <oliver.foster@kineo.com>
-*/
+ * adapt-quicknav
+ * License - http://github.com/adaptlearning/adapt_framework/LICENSE
+ * Maintainers - Oliver Foster <oliver.foster@kineo.com>
+ */
 
 define([
-	'core/js/adapt'
+  'core/js/adapt'
 ], function(Adapt) {
 
-	var QuickNavView = Backbone.View.extend({
+  var QuickNavView = Backbone.View.extend({
 
-		className: "block quicknav",
+    className: "block quicknav",
 
-		events: {
-			"click #root": "onRootClicked",
-			"click #previous": "onPreviousClicked",
-			"click #up": "onUpClicked",
-			"click #next": "onNextClicked"
-		},
+    events: {
+      "click #root": "onRootClicked",
+      "click #previous": "onPreviousClicked",
+      "click #up": "onUpClicked",
+      "click #next": "onNextClicked"
+    },
 
-		initialize: function() {
-			this.listenTo(Adapt, 'remove', this.remove);
-			this.render();
+    initialize: function() {
+      this.listenTo(Adapt, 'remove', this.remove);
+      this.render();
 
-			this.setLocking();
+      this.setLocking();
 
-			if (this.model.config._isEnableNextOnCompletion) {
-				var currentPageModel = this.model.state.currentPage.model;
+      if (this.model.config._isEnableNextOnCompletion) {
+        var currentPageModel = this.model.state.currentPage.model;
 
-				if (currentPageModel.get("_isComplete")) {
-					this.onPageCompleted();
-				} else {
-					this.listenTo(currentPageModel, "change:_isComplete", this.onPageCompleted);
-				}
-			}
-		},
+        if (currentPageModel.get("_isComplete")) {
+          this.onPageCompleted();
+        } else {
+          this.listenTo(currentPageModel, "change:_isComplete", this.onPageCompleted);
+        }
+      }
+    },
 
-		render: function() {
-			var template = Handlebars.templates["quicknav-bar"];
-			this.$el.html(template(this.model));
-			this.checkIfBottom();
+    render: function() {
+      var template = Handlebars.templates["quicknav-bar"];
+      this.$el.html(template(this.model));
+      if (this.model.config._stickyQuicknav._isEnabled) {
+        $('html').removeClass('sticky-quicknav');
+        this.scrollHandler();
+        this.listenTo(Adapt, 'router:location', this.stopScrollListener);
+      }
+      return this;
+    },
 
-			return this;
-		},
+    scrollHandler: function() {
+      var context = this;
+      $(window).on('resize scroll', function() {
+        context.checkIfBottom(context);
+      });
+    },
 
-		checkIfBottom: function() {
-			console.log($(this));
-			$(window).on('scroll', function() {
-				if(window.innerHeight + document.body.scrollTop >= document.body.offsetHeight) {
-					console.log('bottom');
-				}
-				else console.log('notbottom');
-			});
-		},
+    stopScrollListener: function() {
+      $(window).off('resize scroll');
+    },
 
-		setLocking: function() {
-			this.model.state._locked = false;
+    checkIfBottom: _.throttle(function() {
+      if (window.innerHeight + document.body.scrollTop >= document.body.offsetHeight) {
+        $('html').addClass('sticky-quicknav');
+        this.stopScrollListener();
+      }
+    }, 50),
 
-			if (this.model.config._lock) {
-				var contentObjects = this.model.config._lock;
-				var completeCount = 0;
+    setLocking: function() {
+      this.model.state._locked = false;
 
-				for (var i = 0; i < contentObjects.length; i++) {
-					var contentObject = Adapt.contentObjects.findWhere({_id:contentObjects[i]});
+      if (this.model.config._lock) {
+        var contentObjects = this.model.config._lock;
+        var completeCount = 0;
 
-					if (contentObject.get("_isComplete") || !contentObject.get("_isAvailable")) completeCount++;
-				}
+        for (var i = 0; i < contentObjects.length; i++) {
+          var contentObject = Adapt.contentObjects.findWhere({
+            _id: contentObjects[i]
+          });
 
-				if (completeCount < contentObjects.length) {
-					this.model.state._locked = true;
-				}
-			}
+          if (contentObject.get("_isComplete") || !contentObject.get("_isAvailable")) completeCount++;
+        }
 
-			if (this.model.state._locked === true) {
-				this.$('#next').attr("disabled", "disabled");
-			} else {
-				this.$('#next').removeAttr("disabled");
-			}
-		},
+        if (completeCount < contentObjects.length) {
+          this.model.state._locked = true;
+        }
+      }
 
-		onRootClicked: function() {
-			this.parent.onRootClicked();
-		},
+      if (this.model.state._locked === true) {
+        this.$('#next').attr("disabled", "disabled");
+      } else {
+        this.$('#next').removeAttr("disabled");
+      }
+    },
 
-		onPreviousClicked: function() {
-			this.parent.onPreviousClicked();
-		},
+    onRootClicked: function() {
+      this.parent.onRootClicked();
+    },
 
-		onUpClicked: function() {
-			this.parent.onUpClicked();
-		},
+    onPreviousClicked: function() {
+      this.parent.onPreviousClicked();
+    },
 
-		onNextClicked: function() {
-			this.parent.onNextClicked();
-		},
+    onUpClicked: function() {
+      this.parent.onUpClicked();
+    },
 
-		onPageCompleted: function() {
-			this.setLocking();
-		}
+    onNextClicked: function() {
+      this.parent.onNextClicked();
+    },
 
-	});
+    onPageCompleted: function() {
+      this.setLocking();
+    }
 
-	return QuickNavView;
+  });
+
+  return QuickNavView;
 });
