@@ -9,7 +9,7 @@ define([
 ], function(Adapt) {
 
 	var QuickNavView = Backbone.View.extend({
-		
+
 		className: "block quicknav",
 
 		events: {
@@ -33,13 +33,25 @@ define([
 				} else {
 					this.listenTo(currentPageModel, "change:_isComplete", this.onPageCompleted);
 				}
-			}			
+			}
 		},
 
 		render: function() {
 			var template = Handlebars.templates["quicknav-bar"];
 			this.$el.html(template(this.model));
+			this.checkIfBottom();
+
 			return this;
+		},
+
+		checkIfBottom: function() {
+			console.log($(this));
+			$(window).on('scroll', function() {
+				if(window.innerHeight + document.body.scrollTop >= document.body.offsetHeight) {
+					console.log('bottom');
+				}
+				else console.log('notbottom');
+			});
 		},
 
 		setLocking: function() {
