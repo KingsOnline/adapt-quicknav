@@ -49,17 +49,22 @@ define([
 
     scrollHandler: function() {
       var context = this;
-      $(window).on('resize scroll', function() {
-        context.checkIfBottom(context);
+      var windowHeight = $(document).height();
+      $(window).on('scroll.quicknav', function() {
+        context.checkIfBottom(windowHeight);
       });
     },
 
     stopScrollListener: function() {
-      $(window).off('resize scroll');
+      $(window).off('scroll.quicknav');
     },
 
-    checkIfBottom: _.throttle(function() {
-      if (window.innerHeight + document.body.scrollTop >= document.body.offsetHeight) {
+    checkIfBottom: _.throttle(function(windowHeight) {
+      var viewportTop = $(window).scrollTop();
+      var viewportBottom = viewportTop + $(window).height();
+      console.log(windowHeight);
+      if ((viewportBottom) >= windowHeight) {
+                console.log('BOTTOM');
         $('html').addClass('sticky-quicknav');
         this.stopScrollListener();
       }
