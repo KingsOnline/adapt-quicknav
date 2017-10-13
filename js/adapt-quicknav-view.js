@@ -62,13 +62,12 @@ define([
     checkIfBottom: _.throttle(function(windowHeight) {
       var viewportTop = $(window).scrollTop();
       var viewportBottom = viewportTop + $(window).height();
-      console.log(windowHeight);
       if ((viewportBottom) >= windowHeight) {
-                console.log('BOTTOM');
+        Adapt.log.debug('BOTTOM');
         $('html').addClass('sticky-quicknav');
         this.stopScrollListener();
       }
-    }, 50),
+    }, 100),
 
     setLocking: function() {
       this.model.state._locked = false;
