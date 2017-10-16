@@ -22,6 +22,7 @@ define([
     initialize: function() {
       this.listenTo(Adapt, 'remove', this.remove);
       this.render();
+      this.listenTo(Adapt, 'pageView:ready', this.startScrollListener);
 
       this.setLocking();
 
@@ -36,22 +37,24 @@ define([
       }
     },
 
+    startScrollListener: function() {
+      if (this.model.config._stickyQuicknav._isEnabled) {
+        this.scrollHandler();
+      }
+    },
+
     render: function() {
       var template = Handlebars.templates["quicknav-bar"];
       this.$el.html(template(this.model));
-      if (this.model.config._stickyQuicknav._isEnabled) {
-        $('html').removeClass('sticky-quicknav');
-        this.scrollHandler();
-        this.listenTo(Adapt, 'router:location', this.stopScrollListener);
-      }
       return this;
     },
 
     scrollHandler: function() {
       var context = this;
-      var windowHeight = $(document).height();
+      var documentHeight = document.body.scrollHeight - 20;
+      console.log(documentHeight);
       $(window).on('scroll.quicknav', function() {
-        context.checkIfBottom(windowHeight);
+        context.checkIfBottom(documentHeight);
       });
     },
 
@@ -59,10 +62,10 @@ define([
       $(window).off('scroll.quicknav');
     },
 
-    checkIfBottom: _.throttle(function(windowHeight) {
+    checkIfBottom: _.throttle(function(documentHeight) {
       var viewportTop = $(window).scrollTop();
-      var viewportBottom = viewportTop + $(window).height();
-      if ((viewportBottom) >= windowHeight) {
+      var viewportBottom = viewportTop + document.documentElement.clientHeight;
+      if (viewportBottom >= documentHeight) {
         Adapt.log.debug('BOTTOM');
         $('html').addClass('sticky-quicknav');
         this.stopScrollListener();
@@ -116,6 +119,11 @@ define([
       this.setLocking();
     }
 
+  });
+
+  Adapt.on('router:page router:menu', function() {
+    $('html').removeClass('sticky-quicknav');
+    $(window).off('scroll.quicknav');
   });
 
   return QuickNavView;
