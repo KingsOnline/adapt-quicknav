@@ -51,10 +51,8 @@ define([
 
     scrollHandler: function() {
       var context = this;
-      var documentHeight = document.body.scrollHeight - 20;
-      console.log(documentHeight);
       $(window).on('scroll.quicknav', function() {
-        context.checkIfBottom(documentHeight);
+        context.checkIfBottom();
       });
     },
 
@@ -62,15 +60,16 @@ define([
       $(window).off('scroll.quicknav');
     },
 
-    checkIfBottom: _.throttle(function(documentHeight) {
+    checkIfBottom: _.throttle(function() {
       var viewportTop = $(window).scrollTop();
       var viewportBottom = viewportTop + document.documentElement.clientHeight;
+      var documentHeight = document.body.scrollHeight - 5;
       if (viewportBottom >= documentHeight) {
         Adapt.log.debug('BOTTOM');
         $('html').addClass('sticky-quicknav');
         this.stopScrollListener();
       }
-    }, 100),
+    }, 20),
 
     setLocking: function() {
       this.model.state._locked = false;
