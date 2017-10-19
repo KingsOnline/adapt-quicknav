@@ -38,7 +38,7 @@ define([
     },
 
     startScrollListener: function() {
-      if (this.model.config._stickyQuicknav._isEnabled) {
+      if (Adapt.course.get('_quicknav') && Adapt.course.get('_quicknav')._sticky) {
         this.scrollHandler();
       }
     },

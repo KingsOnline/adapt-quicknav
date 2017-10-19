@@ -9,6 +9,27 @@
       "type": "object",
       "required": true,
       "properties": {
+        "course": {
+          "type": "object",
+          "properties": {
+            "_quicknav": {
+              "type": "object",
+              "required": false,
+              "legend": "Quicknav",
+              "properties": {
+                "_sticky": {
+                  "type": "boolean",
+                  "required": false,
+                  "default": false,
+                  "title": "Sticky quicknav",
+                  "inputType": "Checkbox",
+                  "validators": [],
+                  "help": "Once the learner scrolls to the bottom make the quicknav always in view."
+                }
+              }
+            }
+          }
+        },
         "contentobject": {
           "type": "object",
           "properties": {
@@ -16,7 +37,6 @@
               "type": "object",
               "required": false,
               "legend": "Quicknav",
-
               "properties": {
                 "_isEnabled": {
                   "type": "boolean",
