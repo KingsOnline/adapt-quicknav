@@ -8,6 +8,7 @@ define([
 		config: undefined,
 
 		state: {
+			indexOfPage: undefined,
 			lastBlock: undefined,
 			currentMenu: undefined,
 			currentPage: undefined,
@@ -16,7 +17,7 @@ define([
 		},
 
 		menuStructure: {},
-		
+
 		onRootClicked: function() {
 			this.navigateTo("/");
 		},
@@ -50,7 +51,7 @@ define([
 		navigateTo: function(id) {
 			var hash = "#" + (id === "/" ? id : "/id/" + id);
 			Backbone.history.navigate(hash, {
-				trigger: true, 
+				trigger: true,
 				replace: false
 			});
 		},
@@ -172,7 +173,8 @@ define([
 			if (pages === undefined) return;
 
 			var indexOfPage = _.indexOf(pages, this.state.currentPage.model.get("_id"));
-			
+			this.state.indexOfPage = indexOfPage;
+
 			if (this.config._isContinuous == "local" || this.config._isContinuous == "global" ) {
 				if (indexOfPage === 0 && indexOfPage == pages.length - 1 && this.config._isContinuous == "local") {
 					this.state.isFirstPage = true;
@@ -210,6 +212,7 @@ define([
 		var blocks = pageModel.findDescendants("blocks");
 
 		var parentId = pageModel.get("_parentId");
+		console.log(quicknav);
 		quicknav.state.currentMenu = Adapt.findById(parentId);
 		quicknav.state.currentPage = pageView;
 		quicknav.state.lastBlock = blocks.last();
@@ -245,7 +248,7 @@ define([
 				element.append(quickNavView.$el);
 			}
 		}
-		
+
 		quickNavView.delegateEvents();
 	});
 

@@ -21,6 +21,7 @@ define([
 
     initialize: function() {
       this.listenTo(Adapt, 'remove', this.remove);
+      this.applyPageNames(Adapt.course.get('_quicknav'));
       this.render();
       this.listenTo(Adapt, 'pageView:ready', this.startScrollListener);
 
@@ -37,10 +38,21 @@ define([
       }
     },
 
+    applyPageNames: function(genericSettings) {
+      if (!genericSettings || !genericSettings._autoName) return;
+      if (!this.model.state.isFirstPage)
+        this.model.config._buttons._previous.text = this.getPageTitle(this.model.state.indexOfPage - 1);
+      if (!this.model.state.isLastPage)
+        this.model.config._buttons._next.text = this.getPageTitle(this.model.state.indexOfPage + 1);
+    },
+
+    getPageTitle: function(pageIndex) {
+      return Adapt.contentObjects.models[pageIndex].get('title');
+    },
+
     startScrollListener: function() {
-      if (Adapt.course.get('_quicknav') && Adapt.course.get('_quicknav')._sticky) {
-        this.scrollHandler();
-      }
+      if (!Adapt.course.get('_quicknav') || !Adapt.course.get('_quicknav')._sticky) return;
+      this.scrollHandler();
     },
 
     render: function() {
