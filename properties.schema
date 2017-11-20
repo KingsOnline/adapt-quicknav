@@ -18,22 +18,39 @@
               "legend": "Quicknav",
               "properties": {
                 "_sticky": {
-                  "type": "boolean",
+                  "type": "object",
                   "required": false,
-                  "default": false,
-                  "title": "Sticky quicknav",
-                  "inputType": "Checkbox",
-                  "validators": [],
-                  "help": "Once the learner scrolls to the bottom make the quicknav always in view."
-                },
-                "_autoName": {
-                  "type": "boolean",
-                  "required": false,
-                  "default": true,
-                  "title": "Auto name",
-                  "inputType": "Checkbox",
-                  "validators": [],
-                  "help": "Automatically apply the course names to the previous and next labels."
+                  "legend": "Quicknav",
+                  "properties": {
+                    "_isEnabled": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": false,
+                      "title": "Sticky quicknav",
+                      "inputType": "Checkbox",
+                      "validators": [],
+                      "help": "Once the learner scrolls to the bottom make the quicknav always in view."
+                    },
+                    "_time": {
+                        "type":"number",
+                        "required":true,
+                        "default": 3000,
+                        "title": "Time it takes in ms to transition to the sticky view",
+                        "inputType": "Number",
+                        "validators": ["number"],
+                        "help": "3000ms = 3s"
+                    }
+                  },
+                    "_autoName": {
+                      "type": "boolean",
+                      "required": false,
+                      "default": true,
+                      "title": "Auto name",
+                      "inputType": "Checkbox",
+                      "validators": [],
+                      "help": "Automatically apply the course names to the previous and next labels."
+                    }
+
                 }
               }
             }

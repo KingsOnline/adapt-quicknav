@@ -78,8 +78,11 @@ define([
       var documentHeight = document.body.scrollHeight - 5;
       if (viewportBottom >= documentHeight) {
         Adapt.log.debug('BOTTOM');
-        $('html').addClass('sticky-quicknav');
         this.stopScrollListener();
+        setTimeout(
+          function() {
+            $('html').addClass('sticky-quicknav');
+          }, Adapt.course.get('_quicknav')._sticky._time);
       }
     }, 20),
 

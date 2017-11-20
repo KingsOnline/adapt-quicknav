@@ -8,9 +8,6 @@
         "_pageNext":"co-10", // remove if to follow normal flow
         "_pagePrevious": "co-10" // remove if to follow normal flow
     },
-    "_stickyQuicknav": {
-      "_isEnabled": true
-    },
     "_buttons": {
         "_root": {
             "_isHidden": false,
