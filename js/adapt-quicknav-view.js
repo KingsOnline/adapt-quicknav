@@ -51,7 +51,7 @@ define([
     },
 
     startScrollListener: function() {
-      if (!Adapt.course.get('_quicknav') || !Adapt.course.get('_quicknav')._sticky) return;
+      if (!Adapt.course.get('_quicknav') || !Adapt.course.get('_quicknav')._sticky._isEnabled) return;
       this.scrollHandler();
     },
 

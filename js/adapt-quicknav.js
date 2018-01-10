@@ -212,7 +212,6 @@ define([
 		var blocks = pageModel.findDescendants("blocks");
 
 		var parentId = pageModel.get("_parentId");
-		console.log(quicknav);
 		quicknav.state.currentMenu = Adapt.findById(parentId);
 		quicknav.state.currentPage = pageView;
 		quicknav.state.lastBlock = blocks.last();
