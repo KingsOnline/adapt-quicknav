@@ -20,7 +20,7 @@
                 "_sticky": {
                   "type": "object",
                   "required": false,
-                  "legend": "Quicknav",
+                  "legend": "Sticky quicknav",
                   "properties": {
                     "_isEnabled": {
                       "type": "boolean",
@@ -40,6 +40,7 @@
                         "validators": ["number"],
                         "help": "3000ms = 3s"
                     }
+                   }
                   },
                     "_autoName": {
                       "type": "boolean",
@@ -51,7 +52,6 @@
                       "help": "Automatically apply the course names to the previous and next labels."
                     }
 
-                }
               }
             }
           }
