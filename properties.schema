@@ -35,7 +35,7 @@
                         "type":"number",
                         "required":true,
                         "default": 3000,
-                        "title": "Time it takes in ms to transition to the sticky view",
+                        "title": "Time in ms to transition to the sticky view",
                         "inputType": "Number",
                         "validators": ["number"],
                         "help": "3000ms = 3s"
