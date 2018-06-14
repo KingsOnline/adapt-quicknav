@@ -26,6 +26,8 @@ define([
       this.listenTo(Adapt, 'pageView:ready', this.startScrollListener);
 
       this.setLocking();
+      this.checkIfScroll();
+
 
       if (this.model.config._isEnableNextOnCompletion) {
         var currentPageModel = this.model.state.currentPage.model;
@@ -36,6 +38,11 @@ define([
           this.listenTo(currentPageModel, "change:_isComplete", this.onPageCompleted);
         }
       }
+    },
+
+    checkIfScroll: function() {
+        if ($("body").height() > $(window).height()) return;
+        $('html').addClass('sticky-quicknav');
     },
 
     applyPageNames: function(genericSettings) {

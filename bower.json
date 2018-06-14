@@ -2,7 +2,7 @@
   "name": "adapt-quicknav",
   "repository": "git://github.com/cgkineo/adapt-quicknav",
   "framework": "^2.0.0",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "homepage": "https://github.com/cgkineo/adapt-quicknav",
   "issues": "https://github.com/cgkineo/adapt-quicknav/issues/",
   "displayName": "Quick navigation",
