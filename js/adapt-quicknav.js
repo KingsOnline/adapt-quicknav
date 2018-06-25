@@ -44,8 +44,12 @@ define([
 
 			var indexOfCurrentPage = _.indexOf(params.pages, this.state.currentPage.model.get("_id"));
 			var indexOfNextPage = this.getNextPageIndex(params.menus, params.indexOfMenu, params.pages, indexOfCurrentPage);
+			if(params.pages[indexOfNextPage] === undefined) {
+				top.window.close();
+			} else {
+				this.navigateTo(params.pages[indexOfNextPage]);
+			}
 
-			this.navigateTo(params.pages[indexOfNextPage]);
 		},
 
 		navigateTo: function(id) {

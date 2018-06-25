@@ -21,7 +21,8 @@ define([
 
     initialize: function() {
       this.listenTo(Adapt, 'remove', this.remove);
-      this.applyPageNames(Adapt.course.get('_quicknav'));
+      this.model.course = Adapt.course.get('_quicknav');
+      this.applyPageNames(this.model.course);
       this.render();
       this.listenTo(Adapt, 'pageView:ready', this.startScrollListener);
 
@@ -49,8 +50,12 @@ define([
       if (!genericSettings || !genericSettings._autoName) return;
       if (!this.model.state.isFirstPage)
         this.model.config._buttons._previous.text = this.getPageTitle(this.model.state.indexOfPage - 1);
-      if (!this.model.state.isLastPage)
+      if (!this.model.state.isLastPage) {
         this.model.config._buttons._next.text = this.getPageTitle(this.model.state.indexOfPage + 1);
+    } else if (this.model.course._exitButton) {
+        this.model.config._buttons._next.text = "Return to KEATS"
+    }
+
     },
 
     getPageTitle: function(pageIndex) {
