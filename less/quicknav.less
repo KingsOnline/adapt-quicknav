@@ -26,11 +26,28 @@ html.sticky-quicknav {
 		width: 100%;
 	}
 
-	.article .block.quicknav .quicknav-inner .icon {
-		top: 85px;
-	}
-
 	#wrapper {
 		padding-bottom: 70px;
 	}
+}
+
+
+html.sticky-quicknav {
+    .quicknav {
+        width: calc(~'100% - 280px');
+        left: 280px;
+    }
+
+    .contents-hide {
+        .quicknav {
+            width: 100%;
+            left: 0;
+        }
+
+        &.sideview-open {
+            .quicknav {
+                width: 65%;
+            }
+        }
+    }
 }
