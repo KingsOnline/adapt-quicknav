@@ -4,7 +4,7 @@ define([
 	'./quicknav-placeholder'
 ], function(Adapt, QuickNavView) {
 
-	var quicknavExt = Backbone.View.extend({
+	var quicknav = Backbone.View.extend({
 		config: undefined,
 
 		state: {
@@ -45,7 +45,6 @@ define([
 			var indexOfCurrentPage = _.indexOf(params.pages, this.state.currentPage.model.get("_id"));
 			var indexOfNextPage = this.getNextPageIndex(params.menus, params.indexOfMenu, params.pages, indexOfCurrentPage);
 			if(params.pages[indexOfNextPage] === undefined && Adapt.course.get('_quicknav')._exitButton) {
-				Adapt.log.debug('course closing');
 				top.window.close();
 			} else {
 				this.navigateTo(params.pages[indexOfNextPage]);
@@ -256,5 +255,5 @@ define([
 		quickNavView.delegateEvents();
 	});
 
-	return quicknavExt;
+	return quicknav;
 });
