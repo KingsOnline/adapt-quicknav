@@ -4,7 +4,7 @@ define([
 	'./quicknav-placeholder'
 ], function(Adapt, QuickNavView) {
 
-	var quicknav = Backbone.View.extend({
+	var quicknavExt = Backbone.View.extend({
 		config: undefined,
 
 		state: {
@@ -256,5 +256,5 @@ define([
 		quickNavView.delegateEvents();
 	});
 
-	return quicknav;
+	return quicknavExt;
 });
