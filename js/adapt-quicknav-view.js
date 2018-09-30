@@ -1,5 +1,5 @@
 /*
- * adapt-quicknav
+ * adapt-quicknav-ext
  * License - http://github.com/adaptlearning/adapt_framework/LICENSE
  * Maintainers - Oliver Foster <oliver.foster@kineo.com>
  */
@@ -21,7 +21,7 @@ define([
 
     initialize: function() {
       this.listenTo(Adapt, 'remove', this.remove);
-      this.model.course = Adapt.course.get('_quicknav');
+      this.model.course = Adapt.course.get('_quicknavExt');
       this.applyPageNames(this.model.course);
       this.render();
       this.listenTo(Adapt, 'pageView:ready', this.startScrollListener);
@@ -63,7 +63,7 @@ define([
     },
 
     startScrollListener: function() {
-      if (!Adapt.course.get('_quicknav') || !Adapt.course.get('_quicknav')._sticky._isEnabled) return;
+      if (!Adapt.course.get('_quicknavExt') || !Adapt.course.get('_quicknavExt')._sticky._isEnabled) return;
       this.scrollHandler();
     },
 
@@ -94,7 +94,7 @@ define([
         setTimeout(
           function() {
             $('html').addClass('sticky-quicknav');
-          }, Adapt.course.get('_quicknav')._sticky._time);
+          }, Adapt.course.get('_quicknavExt')._sticky._time);
       }
     }, 20),
 

@@ -44,7 +44,7 @@ define([
 
 			var indexOfCurrentPage = _.indexOf(params.pages, this.state.currentPage.model.get("_id"));
 			var indexOfNextPage = this.getNextPageIndex(params.menus, params.indexOfMenu, params.pages, indexOfCurrentPage);
-			if(params.pages[indexOfNextPage] === undefined && Adapt.course.get('_quicknav')._exitButton) {
+			if(params.pages[indexOfNextPage] === undefined && Adapt.course.get('_quicknavExt')._exitButton) {
 				Adapt.log.debug('course closing');
 				top.window.close();
 			} else {
@@ -194,7 +194,7 @@ define([
 			}
 		}
 	});
-	quicknav = new quicknav();
+	quicknav = new quicknavExt();
 
 	Adapt.on("app:dataReady", function() {
 		var menus = Adapt.contentObjects.where({_type: "menu"});
@@ -210,8 +210,8 @@ define([
 
 	Adapt.on("pageView:postRender", function(pageView) {
 		var pageModel = pageView.model;
-		if (pageModel.get("_quicknav") === undefined) return;
-		var config = pageModel.get("_quicknav");
+		if (pageModel.get("_quicknavExt") === undefined) return;
+		var config = pageModel.get("_quicknavExt");
 		if (config._isEnabled !== true && config._isEnabled !== undefined) return;
 
 		var blocks = pageModel.findDescendants("blocks");

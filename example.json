@@ -1,6 +1,6 @@
 // To go in the contentObject.json file for each page
 
-"_quicknav": {
+"_quicknavExt": {
     "_isEnabled": true,
     "_isContinuous": "global",
     "_buttons": {
@@ -25,7 +25,7 @@
 
 // course.json
 
-"_quicknav": {
+"_quicknavExt": {
     "_sticky": {
         "_isEnabled": false,
         "_time": 3000

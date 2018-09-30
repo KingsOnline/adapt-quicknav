@@ -12,7 +12,7 @@
                 "course": {
                     "type": "object",
                     "properties": {
-                        "_quicknav": {
+                        "_quicknavExt": {
                             "type": "object",
                             "required": false,
                             "legend": "Quicknav",
@@ -67,7 +67,7 @@
                 "contentobject": {
                     "type": "object",
                     "properties": {
-                        "_quicknav": {
+                        "_quicknavExt": {
                             "type": "object",
                             "required": false,
                             "legend": "Quicknav",
