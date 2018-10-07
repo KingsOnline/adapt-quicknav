@@ -55,7 +55,7 @@
                                     "type": "boolean",
                                     "required": false,
                                     "default": false,
-                                    "title": "Exit to KEATS on last page",
+                                    "title": "Exit course on last page",
                                     "inputType": "Checkbox",
                                     "validators": [],
                                     "help": "The button on the final page closes the course."
