@@ -1,57 +1,119 @@
-.block.quicknav {
-	text-align: center;
-
-	.quicknav-inner {
-		padding: 30px 0;
-	}
-
-	.button {
-		float: none;
-		margin-bottom: 5px;
-
-		&.icon {
-			color: @button-text-color;
-			display: inline-block;
-			min-height: inherit;
-			padding: 20px;
-		}
-
-		.button-inner {
-			overflow: hidden;
-			text-overflow: ellipsis;
-		}
-	}
-}
-
-html.sticky-quicknav {
-	.quicknav {
-		position: fixed;
-		z-index: 350;
-		bottom: 0;
-		width: 100%;
-	}
-
-	#wrapper {
-		padding-bottom: 70px;
-	}
-}
-
-
-html.sticky-quicknav {
-    .quicknav {
-        width: calc(~'100% - 280px');
-        left: 280px;
+.block.quicknav .button {
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: @navigation-color;
+    color: @navigation-icon-color;
+    border: 0;
+    border-radius: 0;
+    padding: 23px 13px 20px;
+    margin: 0;
+    &:hover {
+        background-color: darken(@navigation-color, 10%);
+				color: @navigation-icon-color;
+        border: 0;
     }
 
-    body:not(.contents-show) {
-        .quicknav {
-            width: 100%;
-            left: 0;
+    .prompt {
+        font-size: 16px;
+    }
+
+    &#previous {
+        float: left;
+
+        .previous-inner {
+            margin-left: 50px;
         }
 
-        &.sideview-open {
-            .quicknav {
-                width: 65%;
+        .prompt {
+            text-align: left;
+        }
+    }
+
+    &#next {
+        float: right;
+
+        .next-inner {
+            margin-right: 50px;
+        }
+
+        .prompt {
+            text-align: right;
+        }
+    }
+
+    &#root {
+        display: none;
+    }
+
+    &#up {
+        display: none;
+    }
+
+    .previous-inner {
+        text-align: left;
+    }
+
+    .next-inner {
+        text-align: right;
+    }
+
+    &.disabled {
+        * {
+            visibility: hidden;
+        }
+    }
+    @media all and (max-width: (@device-width-medium)) {
+        &#previous {
+            width: 25%;
+
+            .previous-inner {
+                display: none;
+            }
+        }
+
+        &#next {
+            width: 75%;
+            font-size: 20px;
+        }
+    }
+}
+
+.article {
+    .block.quicknav {
+        .quicknav-inner {
+            background-color: @navigation-color;
+            color: @navigation-icon-color;
+            max-width: 100%;
+            padding: 0;
+
+            .seperator {
+                position: absolute;
+                left: 50%;
+                width: 1px;
+                height: 93px;
+                margin-top: 0;
+                background-color: @navigation-icon-color;
+                @media all and (max-width: (@device-width-medium)) {
+                    left: 25%;
+                }
+            }
+
+            .icon {
+                font-size: 36px;
+                top: 27px;
+                color: @navigation-icon-color;
+            }
+
+            .icon-controls-left {
+                position: absolute;
+                left: 10px;
+            }
+
+            .icon-controls-right {
+                position: absolute;
+                right: 10px;
             }
         }
     }
