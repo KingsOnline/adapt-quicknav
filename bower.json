@@ -2,19 +2,11 @@
   "name": "adapt-quicknav",
   "repository": "git://github.com/kingsonline/adapt-quicknav",
   "framework": ">=2.0.0",
-<<<<<<< HEAD
-  "version": "2.4.4",
-  "homepage": "https://github.com/kingsonline/adapt-quicknav",
-  "issues": "https://github.com/kingsonline/adapt-quicknav/issues/",
-  "displayName": "Quick navigation",
-  "extension": "quicknav",
-=======
   "version": "2.4.7",
   "homepage": "https://github.com/kingsonline/adapt-quicknav-ext",
   "issues": "https://github.com/kingsonline/adapt-quicknav-ext/issues/",
   "displayName": "QuickNav (footer navigation)",
   "extension": "quicknavExt",
->>>>>>> ext
   "description": "Navigation bar that is displayed at the bottom of Adapt content pages.",
   "main": "/js/adapt-quicknav-ext.js",
   "keywords": [
