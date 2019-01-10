@@ -2,7 +2,7 @@
   "name": "adapt-quicknav-ext",
   "repository": "git://github.com/kingsonline/adapt-quicknav-ext",
   "framework": ">=2.0.0",
-  "version": "2.4.7",
+  "version": "2.5.0",
   "homepage": "https://github.com/kingsonline/adapt-quicknav-ext",
   "issues": "https://github.com/kingsonline/adapt-quicknav-ext/issues/",
   "displayName": "QuickNav (footer navigation)",
