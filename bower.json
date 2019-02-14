@@ -6,6 +6,7 @@
   "homepage": "https://github.com/kingsonline/adapt-quicknav-ext",
   "issues": "https://github.com/kingsonline/adapt-quicknav-ext/issues/",
   "displayName": "QuickNav (footer navigation)",
+  "component": "quicknav-ext",
   "description": "Navigation bar that is displayed at the bottom of Adapt content pages.",
   "main": "/js/adapt-quicknav-ext.js",
   "keywords": [
